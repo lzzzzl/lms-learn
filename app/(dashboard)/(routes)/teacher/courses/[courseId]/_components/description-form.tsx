@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import * as z from "zod";
-// import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,11 +19,10 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { Course } from "@prisma/client";
 
 interface DescriptionFormProps {
-  initialData: {
-    description: string;
-  };
+  initialData: Course;
   courseId: string;
 }
 
@@ -39,7 +37,9 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: {
+      description: initialData?.description || ""
+    },
   });
 
   const { isSubmitting, isValid } = form.formState;
