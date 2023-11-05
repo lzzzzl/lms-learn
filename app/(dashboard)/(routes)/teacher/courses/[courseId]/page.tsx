@@ -6,6 +6,7 @@ import { Banner } from "@/components/banner";
 import { IconBadge } from "@/components/icon-badge";
 import { db } from "@/lib/db";
 
+import { Actions } from "./_components/actions";
 import { AttachmentForm } from "./_components/attachment-form";
 import { CategoryForm } from "./_components/category-form";
 import { ChaptersForm } from "./_components/chapters-form";
@@ -83,7 +84,11 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               Complete all fields {completionText}
             </span>
           </div>
-          {/* Add Actions */}
+          <Actions 
+            disabled={!isComplete}
+            courseId={params.courseId}
+            isPublished={course.isPublished}
+          />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
           <div>
